@@ -136,7 +136,7 @@ def login():
     return render_template('login.html')
 
 # 用戶登出登入的模組
-@app.route('/logout', methods=['POST'])
+@app.route('/logout', methods=['GET'])
 @login_required  # 用于视图保护，后面会详细介绍
 def logout():
     logout_user()  # 登出用户

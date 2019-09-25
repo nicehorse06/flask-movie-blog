@@ -8,6 +8,15 @@
 
 * [中文官網](http://docs.jinkan.org/docs/flask/)
 
+## 執行預備步驟
+* 建立python3的virtualenv
+* pip install -r requirements.txt
+* 啟用`SQLite`DB相關指令
+    * `flask initdb`初始化DB，產生data.db
+    * `flask forge`幫DB增加初始資料
+    * `flask admin`建立帳號
+* `flask run`啟動server
+
 ## todo
 * 部署GCP or AWS
 * blueprint
