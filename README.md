@@ -20,6 +20,7 @@
 ## todo
 * 部署GCP or AWS
 * blueprint
+* 引入docker，[Docker 實戰系列（一）：一步一步帶你 dockerize 你的應用](https://larrylu.blog/step-by-step-dockerize-your-app-ecd8940696f4)
 * 工廠函數
 * [greyli/watchlist](https://github.com/greyli/watchlist)
     * 理解並部署GCP，[PythonAnywhere的部署上線參考](https://read.helloflask.com/c11-deploy)
