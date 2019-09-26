@@ -20,7 +20,10 @@
 ## todo
 * 部署GCP or AWS
 * blueprint
-* 引入docker，[Docker 實戰系列（一）：一步一步帶你 dockerize 你的應用](https://larrylu.blog/step-by-step-dockerize-your-app-ecd8940696f4)
+* 引入docker
+    * [Docker 實戰系列（一）：一步一步帶你 dockerize 你的應用](https://larrylu.blog/step-by-step-dockerize-your-app-ecd8940696f4)
+    * [Docker構建nginx+uwsgi+flask映象](https://www.itread01.com/content/1546680669.html)
+    * [Flask + uWSGI + nginx + mysql + Docker-compose 搭建环境](https://blog.szfszf.top/tech/flask-uwsgi-nginx-mysql-docker-compose-%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83/)
 * 工廠函數
 * [greyli/watchlist](https://github.com/greyli/watchlist)
     * 理解並部署GCP，[PythonAnywhere的部署上線參考](https://read.helloflask.com/c11-deploy)
