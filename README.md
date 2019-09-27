@@ -17,6 +17,8 @@
     * `flask admin`建立帳號
 * `flask run`啟動server
 
+## uwsgi設置
+
 ## todo
 * 部署GCP or AWS
 * blueprint
@@ -25,9 +27,17 @@
     * [Docker構建nginx+uwsgi+flask映象](https://www.itread01.com/content/1546680669.html)
     * [Flask + uWSGI + nginx + mysql + Docker-compose 搭建环境](https://blog.szfszf.top/tech/flask-uwsgi-nginx-mysql-docker-compose-%E6%90%AD%E5%BB%BA%E7%8E%AF%E5%A2%83/)
 * 工廠函數
+* 架nginx、uWSGI、
+    * [在 Ubuntu 上使用 uWSGI 和 Nginx 部署 Flask 项目](https://lufficc.com/blog/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu)
+    * [Linux搭建Python web环境（nginx + flask + uwsgi)](https://www.jianshu.com/p/85692a94e99b)
+    * [Supervisor安装与配置（Linux/Unix进程管理工具）](https://blog.csdn.net/xyang81/article/details/51555473)
+    [nicehorse06/nginx_demo](https://github.com/nicehorse06/nginx_demo)
+    * [使用Nginx和uWSGI部署Flask程序](http://www.xumenger.com/nginx-flask-python-20180331/)
+    * [How To Serve Flask Applications with uWSGI and Nginx on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uswgi-and-nginx-on-ubuntu-18-04)
 * [greyli/watchlist](https://github.com/greyli/watchlist)
     * 理解並部署GCP，[PythonAnywhere的部署上線參考](https://read.helloflask.com/c11-deploy)
     * 架nginx、uWSGI
+        * [在 Ubuntu 上使用 uWSGI 和 Nginx 部署 Flask 项目](https://lufficc.com/blog/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu)
     * 執行自動單元測試
     * 增加更多功能
     * 加入並理解blueprint、工廠函數
