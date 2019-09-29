@@ -17,10 +17,49 @@
     * `flask admin`建立帳號
 * `flask run`啟動server
 
-## uwsgi設置
+## 部屬筆記(Nginx+Gunicorn+Supervisor)
+* 主檔案位置為`/var/www/myflask`
+* git clone 下載即可
+### Nginx
+* 設定檔案位置為`/etc/nginx/nginx.conf`
+```
+events {
+}
+http {
+    server {
+    listen 80;
+    server_name 34.80.16.93; # 这是HOST机器的外部域名，用地址也行
+            location / {
+                proxy_pass http://127.0.0.1:8080; # 这里是指向 gunicorn host 的服务地址
+                proxy_set_header Host $host;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            }
+    }
+}
+```
+### Gunicorn
+* pip install 安裝
+* 執行`gunicorn -w 4 -b 127.0.0.1:8080 app:app –reload –max-requests 1`
+* Supervisor代為執行
+### Supervisor
+* pip install 安裝
+* 設定檔案位置為 ` /etc/supervisor/conf.d/myflask.conf `
+```
+directory=/var/www/myflask/
+command=gunicorn -w 4 -b 127.0.0.1:8080 app:app –reload –max-requests 1
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/myflask.err.log
+stdout_logfile=/var/log/flask.out.log
+```
+
+### 參考
+* [如何使用Nginx, Gunicorn與Supervisor 部署一個Flask App](https://peterli.website/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8nginx-gunicorn%E8%88%87supervisor-%E9%83%A8%E7%BD%B2%E4%B8%80%E5%80%8Bflask-app/)
+* []()
 
 ## todo
-* 部署GCP or AWS
+* GCP
+    * 固定IP
 * blueprint
 * 引入docker
     * [Docker 實戰系列（一）：一步一步帶你 dockerize 你的應用](https://larrylu.blog/step-by-step-dockerize-your-app-ecd8940696f4)
