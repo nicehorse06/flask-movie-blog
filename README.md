@@ -101,6 +101,9 @@ stdout_logfile=/var/log/flask.out.log
 
 ## 其他參考資料
 
+* 免費的網域[nctu me](https://nctu.me/)
+    * [參考文章](https://wayne265265.pixnet.net/blog/post/112082456-%E3%80%90%E6%8E%A8%E8%96%A6%E3%80%91%E6%B0%B8%E4%B9%85%E5%85%8D%E8%B2%BBdomain-name-%3a-nctu.me-domain-hosting)
+
 * [Python Web Flask 實戰開發教學 - 簡介與環境建置](https://blog.techbridge.cc/2017/06/03/python-web-flask101-tutorial-introduction-and-environment-setup/) 此篇有講到幫 Flask 設定 script 跟 manager 幫助開發
 
 * [化整為零的次世代網頁開發標準: WSGI](http://blog.ez2learn.com/2010/01/27/introduction-to-wsgi/) WSGI 為幫助Python跟web server溝通的橋樑
