@@ -18,8 +18,8 @@
     <div class="alert">{{ message }}</div>
     {% endfor %}
     <h2>
-        <img alt="Avatar" class="avatar" src="{{ url_for('static', filename='images/avatar.png') }}">
         {{ user.name }}'s Watchlist
+        <img alt="Avatar" class="avatar" src="{{ url_for('static', filename='images/horse.gif') }}">
     </h2>
     <nav>
         <ul>
@@ -34,7 +34,7 @@
     </nav>
     {% block content %}{% endblock %}
     <footer>
-        <small>&copy; 2018 <a href="http://helloflask.com/tutorial">HelloFlask</a></small>
+        <small>&copy; 2019 <a href="https://github.com/nicehorse06/flask-movie-blog">source code</a></small>
     </footer>
 </body>
 

@@ -59,7 +59,7 @@ class WatchlistTestCase(unittest.TestCase):
         self.assertIn('Test Movie Title', data)
         self.assertEqual(response.status_code, 200)
 
-    # 用於測試的輔助方法，将 follow_redirects 参数设为 True 可以跟随重定向，最终返回的会是重定向后的响应
+    # 用於測試的輔助方法，將 follow_redirects 參數設為 True 可以跟隨重定向，最終返回的會是重定向後的響應
     def login(self):
         self.client.post('/login', data=dict(
             username='test',
@@ -173,7 +173,7 @@ class WatchlistTestCase(unittest.TestCase):
         self.assertNotIn('Login success.', data)
         self.assertIn('Invalid username or password', data)
 
-        # 测试使用错误的用户名登录
+        # 測試使用錯誤的用戶名登錄
         response = self.client.post('/login', data=dict(
             username='wrong',
             password='123'
@@ -182,7 +182,7 @@ class WatchlistTestCase(unittest.TestCase):
         self.assertNotIn('Login success.', data)
         self.assertIn('Invalid username or password', data)
 
-        # 测试使用空的用户名登录
+        # 測試使用空的用戶名登錄
         response = self.client.post('/login', data=dict(
             username='',
             password='123'
@@ -191,7 +191,7 @@ class WatchlistTestCase(unittest.TestCase):
         self.assertNotIn('Login success.', data)
         self.assertIn('Invalid input', data)
 
-        # 测试使用空的密碼登录
+        # 測試使用空的密碼登錄
         response = self.client.post('/login', data=dict(
             username='test',
             password=''
@@ -253,7 +253,7 @@ class WatchlistTestCase(unittest.TestCase):
         result = self.runner.invoke(initdb)
         self.assertIn('Initialized database.', result.output)
 
-        # 测试生成管理员账户
+        # 測試生成管理員賬戶
     def test_admin_command(self):
         db.drop_all()
         db.create_all()
@@ -265,9 +265,9 @@ class WatchlistTestCase(unittest.TestCase):
         self.assertEqual(User.query.first().username, 'grey')
         self.assertTrue(User.query.first().validate_password('123'))
 
-    # 测试更新管理员账户
+    # 測試更新管理員賬戶
     def test_admin_command_update(self):
-        # 使用 args 参数给出完整的命令参数列表
+        # 使用 args 參數給出完整的命令參數列表
         result = self.runner.invoke(
             args=['admin', '--username', 'peter', '--password', '456'])
         self.assertIn('Updating user...', result.output)
@@ -277,6 +277,6 @@ class WatchlistTestCase(unittest.TestCase):
         self.assertTrue(User.query.first().validate_password('456'))
 
 
-# unittest的執行代碼
+# unittest的執行代碼
 if __name__ == '__main__':
     unittest.main()
