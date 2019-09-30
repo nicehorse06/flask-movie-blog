@@ -13,7 +13,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////' + \
     os.path.join(app.root_path, 'data.db')
 
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # 关闭对模型修改的监控 todo 不確定功能
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # 關閉對模型修改的監控 todo 不確定功能
 
 app.config['SECRET_KEY'] = 'dev'  # 設定一個post驗證的key，沒有就不能post
 
@@ -21,16 +21,16 @@ login_manager = LoginManager(app)  # 初始化登入類
 
 # Flask-Login提供一個current_user的變數，如果已登入，此view回傳該用戶model
 @login_manager.user_loader
-def load_user(user_id):  # 创建用户加载回调函数，接受用户 ID 作为参数
-    user = User.query.get(int(user_id))  # 用 ID 作为 User 模型的主键查询对应的用户
-    return user  # 返回用户对象
+def load_user(user_id):  # 創建用戶加載回調函數，接受用戶 ID 作為參數
+    user = User.query.get(int(user_id))  # 用 ID 作為 User 模型的主鍵查詢對應的用戶
+    return user  # 返回用戶對象
 
 db = SQLAlchemy(app)  # 初始化DB
 
 # 宣告表的 schema
 # 繼承UserMixin，可以多一些實用的方法，如is_authenticated判斷是否登入
-class User(db.Model, UserMixin):  # 表名将会是 user（自动生成，小写处理）
-    id = db.Column(db.Integer, primary_key=True)  # 主键
+class User(db.Model, UserMixin):  # 表名將會是 user（自動生成，小寫處理）
+    id = db.Column(db.Integer, primary_key=True)  # 主鍵
     name = db.Column(db.String(20))  # 名字
     username = db.Column(db.String(20))
     password_hash = db.Column(db.String(128))  # 密碼hash，不直接操作
@@ -43,10 +43,11 @@ class User(db.Model, UserMixin):  # 表名将会是 user（自动生成，小写
     def validate_password(self, password):
         return check_password_hash(self.password_hash, password)
 
-class Movie(db.Model):  # 表名将会是 movie
-    id = db.Column(db.Integer, primary_key=True)  # 主键
-    title = db.Column(db.String(60))  # 电影标题
-    year = db.Column(db.String(4))  # 电影年份
+
+class Movie(db.Model):  # 表名將會是 movie
+    id = db.Column(db.Integer, primary_key=True)  # 主鍵
+    title = db.Column(db.String(60))  # 電影標題
+    year = db.Column(db.String(4))  # 電影年份
 
 # 宣告路由
 @app.route('/', methods=['GET', 'POST'])
@@ -54,8 +55,8 @@ def index():
     # request的值只有在view內才能調用，存在一些接收請求的參數
     if request.method == 'POST':
         # 因為@login_required會限制到整個view，而這裡只對POST做限制，故用current_user的方法做判斷
-        if not current_user.is_authenticated:  # 如果当前用户未认证
-            return redirect(url_for('index'))  # 重定向到主页
+        if not current_user.is_authenticated:  # 如果當前用戶未認證
+            return redirect(url_for('index'))  # 重定向到主頁
         # 獲取表單數據
         title = request.form.get('title')
         year = request.form.get('year')
@@ -68,14 +69,15 @@ def index():
         # 儲存資料
         movie = Movie(title=title, year=year)
 
-        # todo 不確定這行功能
+        # 儲存於記憶體
         db.session.add(movie)
+        # 真正存於DB
         db.session.commit()
 
         # flash連動template中的 get_flashed_messages()
         flash('Item created.')
         return redirect(url_for('index'))
-    movies = Movie.query.all()  # 读取所有电影记录
+    movies = Movie.query.all()  # 讀取所有電影記錄
     return render_template('index.html', movies=movies)
 
 # 編輯文章
@@ -89,15 +91,15 @@ def edit(movie_id):
         year = request.form['year']
         if not title or not year or len(year) > 4 or len(title) > 60:
             flash('Invalid input.')
-            return redirect(url_for('edit', movie_id=movie_id))  # 重定向回对应的编辑页面
+            return redirect(url_for('edit', movie_id=movie_id))  # 重定向回對應的編輯頁面
 
-        movie.title = title  # 更新标题
+        movie.title = title  # 更新標題
         movie.year = year  # 更新年份
-        db.session.commit()  # 提交数据库会话
+        db.session.commit()  # 提交數據庫會話
         flash('Item updated.')
-        return redirect(url_for('index'))  # 重定向回主页
+        return redirect(url_for('index'))  # 重定向回主頁
 
-    return render_template('edit.html', movie=movie)  # 传入被编辑的电影记录
+    return render_template('edit.html', movie=movie)  # 傳入被編輯的電影記錄
 
 # 刪除文章
 @app.route('/movie/delete/<int:movie_id>', methods=['POST'])  # 限定POST
@@ -123,25 +125,25 @@ def login():
 
         # todo 這裡用戶只有一個時可以這樣用
         user = User.query.first()
-        # 验证用户名和密码是否一致
+        # 驗證用戶名和密碼是否一致
         if username == user.username and user.validate_password(password):
-            login_user(user)  # 登入用户
+            login_user(user)  # 登入用戶
             flash('Login success.')
             # 驗證成功回主頁面
-            return redirect(url_for('index'))  # 重定向到主页
+            return redirect(url_for('index'))  # 重定向到主頁
 
-        flash('Invalid username or password.')  # 如果验证失败，显示错误消息
-        return redirect(url_for('login'))  # 重定向回登录页面
+        flash('Invalid username or password.')  # 如果驗證失敗，顯示錯誤消息
+        return redirect(url_for('login'))  # 重定向回登錄頁面
 
     return render_template('login.html')
 
 # 用戶登出登入的模組
 @app.route('/logout', methods=['GET'])
-@login_required  # 用于视图保护，后面会详细介绍
+@login_required  # 用於視圖保護，後面會詳細介紹
 def logout():
-    logout_user()  # 登出用户
+    logout_user()  # 登出用戶
     flash('Goodbye.')
-    return redirect(url_for('index'))  # 重定向回首页
+    return redirect(url_for('index'))  # 重定向回首頁
 
 @app.route('/settings', methods=['GET', 'POST'])
 @login_required
@@ -154,8 +156,8 @@ def settings():
             return redirect(url_for('settings'))
 
         current_user.name = name
-        # current_user 会返回当前登录用户的数据库记录对象
-        # 等同于下面的用法
+        # current_user 會返回當前登錄用戶的數據庫記錄對象
+        # 等同於下面的用法
         # user = User.query.first()
         # user.name = name
         db.session.commit()
@@ -164,15 +166,15 @@ def settings():
 
     return render_template('settings.html')
 
-@app.errorhandler(404)  # 传入要处理的错误代码
-def page_not_found(e):  # 接受异常对象作为参数
-    return render_template('404.html'), 404  # 返回模板和状态码
+@app.errorhandler(404)  # 傳入要處理的錯誤代碼
+def page_not_found(e):  # 接受異常對象作為參數
+    return render_template('404.html'), 404  # 返回模板和狀態碼
 
 # context_processor裝飾器可以把很常用到的變量放到模板中，需回傳dict
 @app.context_processor
-def inject_user():  # 函数名可以随意修改
+def inject_user():  # 函數名可以隨意修改
     user = User.query.first()
-    return dict(user=user)  # 需要返回字典，等同于return {'user': user}
+    return dict(user=user)  # 需要返回字典，等同於return {'user': user}
 
 # 擴展flask指令，下 $flask forge即可執行
 @app.cli.command()
@@ -180,8 +182,8 @@ def forge():
     """Generate fake data."""
     db.create_all()
 
-    # 全局的两个变量移动到这个函数内
-    name = 'Grey Li'
+    # 全局的兩個變量移動到這個函數內
+    name = 'Jimmy Ma'
     movies = [
         {'title': 'My Neighbor Totoro', 'year': '1988'},
         {'title': 'Dead Poets Society', 'year': '1989'},
@@ -212,14 +214,14 @@ or
 
 $ flask initdb --drop
 '''
-@app.cli.command()  # 注册为命令
-@click.option('--drop', is_flag=True, help='Create after drop.')  # 设置选项
+@app.cli.command()  # 註冊為命令
+@click.option('--drop', is_flag=True, help='Create after drop.')  # 設置選項
 def initdb(drop):
     """Initialize the database."""
-    if drop:  # 判断是否输入了选项
+    if drop:  # 判斷是否輸入了選項
         db.drop_all()
     db.create_all()
-    click.echo('Initialized database.')  # 输出提示信息
+    click.echo('Initialized database.')  # 輸出提示信息
 
 # 設置註冊admin帳號的指令，option()用來寫入名稱和密碼，指令為flask admin
 @app.cli.command()
@@ -233,14 +235,14 @@ def admin(username, password):
     if user is not None:
         click.echo('Updating user...')
         user.username = username
-        user.set_password(password)  # 设置密码
+        user.set_password(password)  # 設置密碼
     else:
         click.echo('Creating user...')
         user = User(username=username, name='Admin')
-        user.set_password(password)  # 设置密码
+        user.set_password(password)  # 設置密碼
         db.session.add(user)
 
-    db.session.commit()  # 提交数据库会话
+    db.session.commit()  # 提交數據庫會話
     click.echo('Done.')
 
 # 確保直接被解析器引入時使用，而不是被別的 module，如果是別的 module __name__ 會顯示該 module 的名稱

@@ -57,10 +57,15 @@ stdout_logfile=/var/log/flask.out.log
 * [如何使用Nginx, Gunicorn與Supervisor 部署一個Flask App](https://peterli.website/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8nginx-gunicorn%E8%88%87supervisor-%E9%83%A8%E7%BD%B2%E4%B8%80%E5%80%8Bflask-app/)
 * []()
 
+## 更新代碼(目前無CICD)
+* `git pull`，從github拉新的代碼
+* 重起nginx
+    * 重新讀取設定檔：`sudo nginx -s reload` 
+* 重起Supervisor 
+    * `sudo supervisorctl reread`
+    * `sudo service supervisor restart`
+
 ## todo
-* GCP
-    * 固定IP
-* blueprint
 * 引入docker
     * [Docker 實戰系列（一）：一步一步帶你 dockerize 你的應用](https://larrylu.blog/step-by-step-dockerize-your-app-ecd8940696f4)
     * [Docker構建nginx+uwsgi+flask映象](https://www.itread01.com/content/1546680669.html)
