@@ -1,5 +1,8 @@
 # Flask Movie List
 
+* 功能為列出我的電影推薦列表，可以連到IMDb查看更多資訊，管理者帳號可以登入做修改
+* 有單元測試，測試DB撰寫、頁面新增查改、頁面例外錯誤、flask字定義命令是否成功
+
 ## 相關指令
 * `flask run`：執行flask
 * `flask initdb`：初始化DB，產生data.db
