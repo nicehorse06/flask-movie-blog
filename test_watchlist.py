@@ -203,7 +203,7 @@ class WatchlistTestCase(unittest.TestCase):
         # 測試登出
     def test_logout(self):
         self.login()
-        response = self.client.post('/logout', follow_redirects=True)
+        response = self.client.get('/logout', follow_redirects=True)
         data = response.get_data(as_text=True)
         self.assertIn('Goodbye.', data)
         self.assertNotIn('Logout', data)
