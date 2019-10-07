@@ -45,6 +45,7 @@ http {
 * pip install 安裝
 * 設定檔案位置為 ` /etc/supervisor/conf.d/myflask.conf `
 ```
+[program:myflask]
 directory=/var/www/myflask/
 command=gunicorn -w 4 -b 127.0.0.1:8080 app:app –reload –max-requests 1
 autostart=true
